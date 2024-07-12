@@ -8,10 +8,10 @@ import (
 )
 
 func main() {
-	fmt.Println("Welcome to blnote!")
+	initNotes()
 }
 
-func init() {
+func initNotes() {
 	fmt.Println("Welcome to blnote!")
 	stdin := bufio.NewReader(os.Stdin)
 Infinite:
