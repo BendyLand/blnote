@@ -24,10 +24,14 @@ func DisplayNodes(nodes Nodes) {
 		var link *string
 		link = node.Link
 		if link == nil {
-			temp := "nil"
+			temp := ""
 			link = &temp
 		}
-		fmt.Printf("Name: %s\nLink: %s\nText: %s\n\n", node.Name, *link, node.Text)
+		if *link == "" {
+			fmt.Printf("%s:\n%s\n\n", node.Name, node.Text)
+		} else {
+			fmt.Printf("%s.%s:\n%s\n\n", *link, node.Name, node.Text)
+		}
 	}
 }
 

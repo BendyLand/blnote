@@ -1,6 +1,7 @@
 package main
 
 import (
+	"blnote/cmd"
 	"blnote/node"
 	"blnote/note"
 	"bufio"
@@ -44,7 +45,7 @@ Infinite:
 			node.DisplayNodes(nodes)
 		case strings.Contains(input, "link"):
 			inputNodes := strings.Split(input, " ")
-			if len(nodes) > 2 {
+			if len(inputNodes) > 2 {
 				node1, err1 := node.GetNode(inputNodes[1], nodes)
 				node2, err2 := node.GetNode(inputNodes[2], nodes)
 				if err1 != nil {
@@ -61,6 +62,8 @@ Infinite:
 				fmt.Println("Unable to link nodes. Invalid arguments.")
 			}
 		case input == "exit":
+			fmt.Println("Saving current nodes...")
+			cmd.WriteNodesToFile(nodes)
 			fmt.Println("Shutting down...\nGoodbye!")
 			break Infinite
 		default:
