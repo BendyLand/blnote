@@ -36,15 +36,33 @@ Infinite:
 				name = "Untitled"
 			}
 			text := note.GetText()
-			newNode := node.NewNode(name, text)
+			newNode := node.NewNode(name, text, nil)
 			node.UpdateNodes(newNode, &nodes)
-		case input == "exit":
-			fmt.Println("Shutting down...\nGoodbye!")
-			break Infinite
 		case input == "help":
 			note.HelpMenu()
 		case input == "show":
 			node.DisplayNodes(nodes)
+		case strings.Contains(input, "link"):
+			inputNodes := strings.Split(input, " ")
+			if len(nodes) > 2 {
+				node1, err1 := node.GetNode(inputNodes[1], nodes)
+				node2, err2 := node.GetNode(inputNodes[2], nodes)
+				if err1 != nil {
+					fmt.Println("Error getting first node:", err1, "| Aborting link.")
+					continue
+				}
+				if err2 != nil {
+					fmt.Println("Error getting first node:", err2, "| Aborting link.")
+					continue
+				}
+				node.LinkNodes(node1, node2)
+				fmt.Println("Nodes linked successfully!")
+			} else {
+				fmt.Println("Unable to link nodes. Invalid arguments.")
+			}
+		case input == "exit":
+			fmt.Println("Shutting down...\nGoodbye!")
+			break Infinite
 		default:
 			fmt.Println("Unknown command.")
 		}
