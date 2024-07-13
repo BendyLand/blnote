@@ -14,6 +14,8 @@ func main() {
 	nodes := node.Nodes{}
 	fmt.Println("Welcome to blnote!")
 	mainLoop(nodes)
+	//todo: brainstorm display methods
+	//todo: after reading nodes, if you link anything, a leading . is added to solo nodes.
 }
 
 func mainLoop(nodes node.Nodes) {
@@ -61,6 +63,9 @@ Infinite:
 			} else {
 				fmt.Println("Unable to link nodes. Invalid arguments.")
 			}
+		case input == "read":
+			nodes = cmd.ReadNodesFromFile()
+			fmt.Println(nodes)
 		case input == "exit":
 			fmt.Println("Saving current nodes...")
 			cmd.WriteNodesToFile(nodes)

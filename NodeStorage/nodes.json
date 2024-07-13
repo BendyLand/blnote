@@ -1,5 +1,5 @@
 {
-	"three.one": "this is some sample text",
-	"two": "this is some more sample text",
-	"two.three": "some final sample text for note three"
+	"two.one": "some text",
+	"two": "some more text as an example",
+	"three": "some final example text to read in three"
 }

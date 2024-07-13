@@ -3,8 +3,10 @@ package cmd
 import (
 	"blnote/node"
 	"blnote/utils"
+	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func SaveNote(name string, text string) node.Node {
@@ -57,4 +59,33 @@ func WriteNodesToFile(nodes node.Nodes) {
 	} else {
 		fmt.Println("Nodes encountered problems being written. Please double check the contents.")
 	}
+}
+
+func ReadNodesFromFile() node.Nodes {
+	file, err := os.ReadFile("./NodeStorage/nodes.json")
+	if err != nil {
+		fmt.Println("No previous nodes found.")
+		return node.Nodes{}
+	}
+	result := make(map[string]string)
+	err = json.Unmarshal(file, &result)
+	if err != nil {
+		fmt.Println("Unable to parse JSON.")
+		return node.Nodes{}
+	}
+	nodes := new(node.Nodes)
+	for k, v := range result {
+		name := ""
+		link := ""
+		if strings.Contains(k, ".") {
+			parts := strings.Split(k, ".")
+			name = parts[0]
+			link = parts[1]
+		} else {
+			name = k
+		}
+		temp := node.Node{Name: name, Text: v, Link: &link}
+		*nodes = append(*nodes, temp)
+	}
+	return *nodes
 }
