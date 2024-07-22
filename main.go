@@ -15,7 +15,6 @@ func main() {
 	fmt.Println("Welcome to blnote!")
 	mainLoop(nodes)
 	//todo: brainstorm display methods
-	//todo: after reading nodes, if you link anything, a leading . is added to solo nodes.
 }
 
 func mainLoop(nodes node.Nodes) {
@@ -63,12 +62,8 @@ Infinite:
 			if len(inputNodes) > 2 {
 				node1, err1 := node.GetNode(inputNodes[1], nodes)
 				node2, err2 := node.GetNode(inputNodes[2], nodes)
-				if err1 != nil {
-					fmt.Println("Error getting first node:", err1, "| Aborting link.")
-					continue
-				}
-				if err2 != nil {
-					fmt.Println("Error getting first node:", err2, "| Aborting link.")
+				if err1 != nil || err2 != nil {
+					fmt.Println("Error getting first two nodes:", err1, err2, "| Aborting link.")
 					continue
 				}
 				node.LinkNodes(node1, node2)
