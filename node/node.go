@@ -5,7 +5,7 @@ import "fmt"
 type Node struct {
 	Name string
 	Text string
-	Link *string 
+	Link *string
 }
 
 type Nodes []Node
@@ -35,9 +35,9 @@ func DisplayNodes(nodes Nodes) {
 	}
 }
 
-func GetNode(nodeName string, nodes Nodes) (*Node, error){
+func GetNode(nodeName string, nodes Nodes) (*Node, error) {
 	// using a range loop breaks the behavior.
-	for i := 0; i < len(nodes); i++ { 
+	for i := 0; i < len(nodes); i++ {
 		if nodes[i].Name == nodeName {
 			return &nodes[i], nil
 		}
@@ -51,4 +51,25 @@ func LinkNodes(node1 *Node, node2 *Node) {
 		node2.Link = new(string)
 	}
 	*node2.Link = node1.Name
+}
+
+func DeleteNode(nodeName string, nodes *Nodes) error {
+	idx := -1
+	for i := 0; i < len(*nodes); i++ {
+		if (*nodes)[i].Name == nodeName {
+			idx = i
+			break
+		}
+	}
+	if idx == -1 || idx >= len(*nodes) {
+		err := fmt.Errorf("Node not found.\n")
+		return err
+	}
+	*nodes = removeNode(*nodes, idx)
+	return nil
+}
+
+func removeNode(nodes Nodes, i int) Nodes {
+	nodes[i] = nodes[len(nodes)-1]
+	return  nodes[:len(nodes)-1]
 }

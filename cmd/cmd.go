@@ -87,5 +87,6 @@ func ReadNodesFromFile() node.Nodes {
 		temp := node.Node{Name: name, Text: v, Link: &link}
 		*nodes = append(*nodes, temp)
 	}
+	fmt.Println("Nodes read successfully!")
 	return *nodes
 }

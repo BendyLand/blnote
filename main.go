@@ -41,6 +41,19 @@ Infinite:
 			text := note.GetText()
 			newNode := node.NewNode(name, text, nil)
 			node.UpdateNodes(newNode, &nodes)
+		case strings.Contains(input, "remove"):
+			args := strings.Split(input, " ")
+			if len(args) > 1 {
+				args = args[1:]
+				for _, arg := range args {
+					err = node.DeleteNode(arg, &nodes)
+					if err != nil {
+						fmt.Println(err)
+					}
+				}
+			} else {
+				fmt.Println("Unable to delete node. Invalid arguments.")
+			}
 		case input == "help":
 			note.HelpMenu()
 		case input == "show":
