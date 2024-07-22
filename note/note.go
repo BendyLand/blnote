@@ -25,7 +25,7 @@ func HelpMenu() {
 }
 
 func showCommands() {
-	commands := []string{"new <note name>", "help", "exit"}
+	commands := []string{"new <note name>", "link <node1> <node2>", "read", "help", "exit"}
 	fmt.Println("The available commands are:")
 	for _, command := range commands {
 		fmt.Println(command)

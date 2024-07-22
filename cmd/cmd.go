@@ -28,19 +28,19 @@ func WriteNodesToFile(nodes node.Nodes) {
 		os.Exit(1)
 	}
 	defer file.Close()
-	errs := 0 
+	errs := 0
 	file.WriteString("{\n")
 	for i, node := range nodes {
 		line := ""
-		if node.Link != nil {
-			line = fmt.Sprintf("\t\"%s.%s\": \"%s\"", *node.Link, node.Name, node.Text)
+		if node.Link == nil || len(*node.Link) == 0 {
+			line = fmt.Sprintf("\t\"%s\": \"%s\"", node.Name, node.Text)
 			if i < len(nodes)-1 {
 				line += ",\n"
 			} else {
 				line += "\n"
 			}
 		} else {
-			line = fmt.Sprintf("\t\"%s\": \"%s\"", node.Name, node.Text)
+			line = fmt.Sprintf("\t\"%s.%s\": \"%s\"", node.Name, *node.Link, node.Text)
 			if i < len(nodes)-1 {
 				line += ",\n"
 			} else {
@@ -51,7 +51,7 @@ func WriteNodesToFile(nodes node.Nodes) {
 		if err != nil {
 			fmt.Println("Error writing string to file:", err)
 			errs++
-		} 
+		}
 	}
 	file.WriteString("}")
 	if errs == 0 {

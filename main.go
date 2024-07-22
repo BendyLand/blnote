@@ -65,7 +65,6 @@ Infinite:
 			}
 		case input == "read":
 			nodes = cmd.ReadNodesFromFile()
-			fmt.Println(nodes)
 		case input == "exit":
 			fmt.Println("Saving current nodes...")
 			cmd.WriteNodesToFile(nodes)
