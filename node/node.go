@@ -1,6 +1,10 @@
 package node
 
-import "fmt"
+import (
+	"fmt"
+	"slices"
+	"strings"
+)
 
 type Node struct {
 	Name string
@@ -20,19 +24,45 @@ func UpdateNodes(node Node, nodes *Nodes) {
 
 func DisplayNodes(nodes Nodes) {
 	fmt.Println("Current nodes:")
+	var links []string
+	var nonLinks []string
 	for _, node := range nodes {
 		var link *string
+		var line string
 		link = node.Link
 		if link == nil {
 			temp := ""
 			link = &temp
 		}
-		if *link == "" {
-			fmt.Printf("%s:\n%s\n\n", node.Name, node.Text)
+		if *link == "" && !slices.Contains(links, node.Name) {
+			line = node.Name + "\n"
+			nonLinks = append(nonLinks, line)
 		} else {
-			fmt.Printf("%s.%s:\n%s\n\n", *link, node.Name, node.Text)
+			if !slices.Contains(links, node.Name) {
+				line = *node.Link + " <- " + node.Name + "\n"
+				links = append(links, line)
+			}
 		}
 	}
+	nonLinks = removeLinksFromNonLinkGroup(links, nonLinks)
+	tempSlice := slices.Concat(nonLinks, links)
+	result := strings.Join(tempSlice, "\n")
+	fmt.Println(result)
+}
+
+func removeLinksFromNonLinkGroup(links []string, nonLinks []string) []string {
+	var result []string
+	Outer: for _, item := range nonLinks {
+		item = strings.TrimRight(item, "\n")
+		for _, link := range links {
+			link = strings.TrimRight(link, "\n")
+			if strings.Contains(link, item) {
+				continue Outer
+			}
+		}
+		result = append(result, item)
+	}
+	return result
 }
 
 func GetNode(nodeName string, nodes Nodes) (*Node, error) {
