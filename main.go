@@ -14,7 +14,6 @@ func main() {
 	nodes := node.Nodes{}
 	fmt.Println("Welcome to blnote!")
 	mainLoop(nodes)
-	//todo: brainstorm display methods
 }
 
 func mainLoop(nodes node.Nodes) {
@@ -73,6 +72,13 @@ Infinite:
 			}
 		case input == "read":
 			nodes = cmd.ReadNodesFromFile()
+		case strings.Contains(input, "check"): 
+			args := strings.Split(input, " ")
+			if len(args) < 2 {
+				fmt.Println("Unable to check node. No name given.")
+				continue
+			} 
+			node.CheckNode(args[1], nodes)
 		case input == "exit":
 			fmt.Println("Saving current nodes...")
 			cmd.WriteNodesToFile(nodes)

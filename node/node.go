@@ -35,11 +35,11 @@ func DisplayNodes(nodes Nodes) {
 			link = &temp
 		}
 		if *link == "" && !slices.Contains(links, node.Name) {
-			line = node.Name + "\n"
+			line = node.Name 
 			nonLinks = append(nonLinks, line)
 		} else {
 			if !slices.Contains(links, node.Name) {
-				line = *node.Link + " <- " + node.Name + "\n"
+				line = *node.Link + " <- " + node.Name
 				links = append(links, line)
 			}
 		}
@@ -102,4 +102,14 @@ func DeleteNode(nodeName string, nodes *Nodes) error {
 func removeNode(nodes Nodes, i int) Nodes {
 	nodes[i] = nodes[len(nodes)-1]
 	return  nodes[:len(nodes)-1]
+}
+
+func CheckNode(name string, nodes Nodes) {
+	for _, node := range nodes {
+		if node.Name == name {
+			fmt.Printf("%s: %s\n", node.Name, node.Text)
+			return
+		}
+	}
+	fmt.Println("Node not found.")
 }
