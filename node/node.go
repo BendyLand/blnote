@@ -96,6 +96,7 @@ func DeleteNode(nodeName string, nodes *Nodes) error {
 		return err
 	}
 	*nodes = removeNode(*nodes, idx)
+	fmt.Println("Node removed successfully.")
 	return nil
 }
 
