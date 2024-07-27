@@ -14,6 +14,12 @@ func main() {
 	nodes := node.Nodes{}
 	fmt.Println("Welcome to blnote!")
 	mainLoop(nodes)
+	/* 
+	todo:
+	Given nodes: two <- one, if node `two` is deleted, when the nodes are displayed, node `one` will still show its Link field properly, so it will appear like the parent itself still exists.
+	If you attempt to `check` the contents of the parent node, it will not be found. 
+	todo: find way to validate Link before displaying, possibly display updated message when removed or remove all links when parent is removed.
+	*/
 }
 
 func mainLoop(nodes node.Nodes) {
