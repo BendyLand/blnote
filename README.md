@@ -54,7 +54,7 @@ link `<node1>` `<node2>`
   - node_one <- node_two (when they're displayed.)
 
 check `<note_name>`
- - Displays the saved text from inside <note_name>. 
+ - Displays the saved text from inside `<note_name>`. 
  
 remove `<note_name>`
  - Removes `<note_name>` from your list.
