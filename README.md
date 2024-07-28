@@ -44,7 +44,7 @@ If you have used the tool previously, using the `read` command will load any sav
   
 ## Commands
 
-**new** <note name>
+**new** `<note name>`
  - Creates a new Node with the given name. Will prompt for text after entering name.
    - Note: names cannot include whitespace yet. Anything past the first word will be omitted.
 
