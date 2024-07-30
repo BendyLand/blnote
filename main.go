@@ -39,6 +39,20 @@ Infinite:
 			node.UpdateNodes(newNode, &nodes)
 		case strings.Contains(input, "remove"):
 			removeNode(input, err, &nodes)
+		case strings.Contains(input, "edit"):
+			args := strings.Split(input, " ")
+			if len(args) < 2 {
+				fmt.Println("Unable to edit node. No name given.")
+				continue
+			}
+			fmt.Println("Enter new text for node:")
+			newText, err := stdin.ReadString('\n')
+			if err != nil {
+				fmt.Println("Error geting new text for node.")
+				continue
+			}
+			newText = strings.TrimRight(newText, " \n")
+			node.EditNode(args[1], newText, &nodes)
 		case input == "help":
 			note.HelpMenu()
 		case input == "show":

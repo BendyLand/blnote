@@ -114,3 +114,14 @@ func CheckNode(name string, nodes Nodes) {
 	}
 	fmt.Println("Node not found.")
 }
+
+func EditNode(name string, newText string, nodes *Nodes) {
+	for i := 0; i < len(*nodes); i++ {
+		if (*nodes)[i].Name == name {
+			(*nodes)[i].Text = newText
+			fmt.Println("Node updated!")
+			return
+		}
+	}
+	fmt.Println("Node not found.")
+}
